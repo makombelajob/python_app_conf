@@ -1,10 +1,17 @@
-from flask import Flask
+from flask import Flask, render_template
 
 app = Flask(__name__)
 
+
 @app.route("/")
 def home():
-    return "Salut tonton 😎 Ton app Python marche !"
+    return render_template("dvwa.html")
+
+
+@app.route("/dvwa")
+def dvwa():
+    return render_template("dvwa.html")
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
