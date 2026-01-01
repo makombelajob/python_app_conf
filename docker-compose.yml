@@ -1,0 +1,25 @@
+version: '3.3'
+
+services:
+  portainer:
+    image: portainer/portainer-ce:latest
+    ports:
+      - "9443:9443"
+    volumes:
+      - portainer_data:/data
+      - /var/run/docker.sock:/var/run/docker.sock
+    restart: unless-stopped
+
+  python_app:
+    build:
+      context: .
+      dockerfile: Dockerfile/Dockerfile
+    container_name: python_app
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./app:/app
+    restart: unless-stopped
+
+volumes:
+  portainer_data:
